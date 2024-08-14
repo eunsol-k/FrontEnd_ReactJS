@@ -11,6 +11,7 @@ const EmployeeComponent = () => {
     const [email, setEmail] = useState('')
     const [departmentId, setDepartmentId] = useState('')
     const [departments, setDepartments] = useState([])
+    const [disable, setDisable] = useState(false)
 
     useEffect(() => {
         getAllDepartments().then((response) => {
@@ -37,6 +38,7 @@ const EmployeeComponent = () => {
                 setLastName(response.data.lastName);
                 setEmail(response.data.email);
                 setDepartmentId(response.data.departmentId)
+                setDisable(true)
             }).catch(error => {
                 console.error(error);
             })
@@ -162,6 +164,7 @@ const EmployeeComponent = () => {
                                 placeholder='Enter Employee Email'
                                 name='email'
                                 value={email}
+                                disabled={disable}
                                 className={`form-control ${ errors.email ? 'is-invalid': '' }`}
                                 onChange={(e) => setEmail(e.target.value)}
                             >
@@ -179,8 +182,10 @@ const EmployeeComponent = () => {
                                <option value="Select Department">Select Department</option>
                                 {
                                     departments.map( department => 
-                                        <option key={department.id} value={department.id} > {department.departmentName}</option>
-                                        )
+                                        <option key={department.id} value={department.id}>
+                                            {department.departmentName}
+                                        </option>
+                                    )
                                 }
                             </select>
                             { errors.department && <div className='invalid-feedback'> { errors.department} </div> }
