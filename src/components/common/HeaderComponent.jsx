@@ -18,7 +18,7 @@ const HeaderComponent = () => {
                     </li>
                   </ul>
               </div>
-              <div className="navbar-brand">{import.meta.env.VITE_APIURL}</div>
+              <div className="navbar-brand">{import.meta.env.VITE_MODE}</div>
             </nav>
         </header>
     </div>
